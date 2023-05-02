@@ -63,6 +63,8 @@ h6 {
   --teal-700: rgb(15 118 110);
   --gray-700: rgb(55 65 81);
   --gray-800: rgb(31 41 55);
+  --sky-600: rgb(2 132 199);
+  --sky-700: rgb(3 105 161);
 }
 
 button {
@@ -215,6 +217,24 @@ body {
 
 #generate-joke-button:hover {
   background-color: var(--teal-700);
+}
+
+#copy-button {
+  margin-top: 10px;
+  background-color: var(--sky-600);
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  font-weight: bold;
+  transition-property: all;
+  cursor: pointer;
+  padding: 10px 15px 10px 15px;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+#copy-button:hover {
+  background-color: var(--sky-700);
 }
 
 #counter-value {
