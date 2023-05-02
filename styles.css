@@ -106,14 +106,14 @@ body {
   align-items: center;
 }
 
-.content {
+.content-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.content-title {
+.content {
   display: flex;
   flex-direction: column;
   justify-content: center;

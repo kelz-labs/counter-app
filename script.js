@@ -6,6 +6,7 @@ const counterValue = document.getElementById("counter-value");
 const joke = document.getElementById("joke");
 const btnGenerateJoke = document.getElementById("generate-joke-button");
 const copyButton = document.getElementById("copy-button");
+const content = document.querySelector(".content");
 
 function setTheme(themeName) {
   localStorage.setItem("theme", themeName);
@@ -86,6 +87,12 @@ let tempResult = "";
 
 async function generateJoke() {
   try {
+    const newCopyButton = document.createElement("button");
+
+    newCopyButton.setAttribute("id", "copy-button");
+    newCopyButton.innerText = "Anime Juga";
+    newCopyButton.addEventListener("click", () => copyToClipboard());
+
     const response = await sendRequest(
       "GET",
       "https://candaan-api.vercel.app/api/text/random"
@@ -93,6 +100,7 @@ async function generateJoke() {
 
     joke.innerText = response.data;
     tempResult = response.data;
+    content.appendChild(newCopyButton);
   } catch (err) {
     console.error(err);
   }
