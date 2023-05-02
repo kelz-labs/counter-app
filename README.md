@@ -1,10 +1,12 @@
 <div align="center">
   <h1>Counter App</h1>
+  <p>
+    Just a simple project for exercise using HTML, CSS, Javascript. No Framework.
+  </p>
 </div>
 
-Just a simple project for exercise using HTML, CSS, Javascript. No Framework.
 
-## Feature
+## Features
 
 - Counter value(plus and minus).
 - Get random joke.

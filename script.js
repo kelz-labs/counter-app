@@ -84,15 +84,10 @@ function sendRequest(method, url) {
 }
 
 let tempResult = "";
+let elementAdded = false;
 
 async function generateJoke() {
   try {
-    const newCopyButton = document.createElement("button");
-
-    newCopyButton.setAttribute("id", "copy-button");
-    newCopyButton.innerText = "Anime Juga";
-    newCopyButton.addEventListener("click", () => copyToClipboard());
-
     const response = await sendRequest(
       "GET",
       "https://candaan-api.vercel.app/api/text/random"
@@ -100,7 +95,19 @@ async function generateJoke() {
 
     joke.innerText = response.data;
     tempResult = response.data;
-    content.appendChild(newCopyButton);
+
+    if (!elementAdded) {
+      const newCopyButton = document.createElement("button");
+
+      newCopyButton.setAttribute("id", "copy-button");
+      newCopyButton.innerText = "Copy";
+      newCopyButton.addEventListener("click", () => {
+        copyToClipboard();
+      });
+
+      elementAdded = true;
+      content.appendChild(newCopyButton);
+    }
   } catch (err) {
     console.error(err);
   }
@@ -109,6 +116,10 @@ async function generateJoke() {
 // Copy feature
 async function copyToClipboard() {
   try {
+    /**
+     * Check if user was generate the joke or not.
+     * - if length of the result === 0, then set btnGenerateJoke innerText to custom text
+     */
     if (tempResult.length === 0) {
       setTimeout(() => {
         btnGenerateJoke.innerText = "Random Joke";
@@ -118,6 +129,10 @@ async function copyToClipboard() {
       return;
     }
 
+    /**
+     * Copy to clipboard
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard
+     */
     if ("clipboard" in navigator) {
       await navigator.clipboard.writeText(joke.innerText);
 
