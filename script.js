@@ -17,27 +17,29 @@ const content = document.querySelector(".content");
 // required
 const secret = "1qir241MJiW@";
 
-function encrypt(string) {
-  return CryptoJS.AES.encrypt(string, secret).toString();
+class SecureData {
+  encrypt(string) {
+    return CryptoJS.AES.encrypt(string, secret).toString();
+  }
+
+  decryptedDataToUtf8(encrypted) {
+    const bytes = CryptoJS.AES.decrypt(encrypted, secret);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
 }
 
-function decrypt(encrypted) {
-  return CryptoJS.AES.decrypt(encrypted, secret);
-}
+const secureData = new SecureData();
 
 class Theme {
-  set(themeName) {
-    localStorage.setItem("theme", encrypt(themeName));
+  static set(themeName) {
+    localStorage.setItem("theme", secureData.encrypt(themeName));
     body.className = themeName;
   }
 
-  get(encryptedData) {
-    let bytes = decrypt(encryptedData);
-    return bytes.toString(CryptoJS.enc.Utf8);
-  }
-
   switchTheme() {
-    if (this.get(localStorage.getItem("theme")) === "dark") {
+    if (
+      secureData.decryptedDataToUtf8(localStorage.getItem("theme")) === "dark"
+    ) {
       this.set("light");
       btnSwitchTheme.innerText = "Light Mode";
     } else {
@@ -47,7 +49,9 @@ class Theme {
   }
 
   initialTheme() {
-    if (this.get(localStorage.getItem("theme")) === "dark") {
+    if (
+      secureData.decryptedDataToUtf8(localStorage.getItem("theme")) === "dark"
+    ) {
       this.set("dark");
       btnSwitchTheme.innerText = "Dark Mode";
     } else {
@@ -61,24 +65,24 @@ const theme = new Theme();
 theme.initialTheme();
 
 class Counter {
-  set(value) {
-    localStorage.setItem("counter-value", encrypt(value.toString()));
-  }
-
-  get(encryptedData) {
-    let bytes = decrypt(encryptedData);
-    return bytes.toString(CryptoJS.enc.Utf8);
+  static set(value) {
+    localStorage.setItem("counter-value", secureData.encrypt(value.toString()));
   }
 
   plus() {
-    const result = Number(this.get(localStorage.getItem("counter-value"))) + 1;
+    const result =
+      Number(
+        secureData.decryptedDataToUtf8(localStorage.getItem("counter-value"))
+      ) + 1;
 
     counterValue.innerText = result;
     this.set(result);
   }
 
   minus() {
-    const value = Number(this.get(localStorage.getItem("counter-value")));
+    const value = Number(
+      secureData.decryptedDataToUtf8(localStorage.getItem("counter-value"))
+    );
     const result = value - 1;
 
     if (value <= 0) return;
@@ -93,7 +97,9 @@ class Counter {
   }
 
   initialCounterValue() {
-    counterValue.innerText = this.get(localStorage.getItem("counter-value"));
+    counterValue.innerText = secureData.decryptedDataToUtf8(
+      localStorage.getItem("counter-value")
+    );
   }
 }
 
@@ -104,7 +110,7 @@ let tempResult = "";
 let elementAdded = false;
 
 class Joke {
-  sendRequest(method, url) {
+  static sendRequest(method, url) {
     const promise = new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
