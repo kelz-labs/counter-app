@@ -5,11 +5,13 @@
   </p>
 </div>
 
+## Things i learn so far
 
-## Features
+- Class.
+- Encrypted localstorage data.
+- XMLHttpRequest.
 
-- Counter value(plus and minus).
-- Get random joke.
-- Copy random joke.
-- Dark mode.
-- Some data(except copy value and random joke) stored to [localstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+## TODO
+
+- Trying Web components
+- Simplified javascript code

@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter App</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -16,14 +19,15 @@
                 <div class="content">
                     <h1 class="content-title-heading">Counter App</h1>
                     <div class="list-button">
-                        <button id="plus-button" type="button" aria-label="plus" onclick="plus()">Plus</button>
-                        <button id="minus-button" type="button" aria-label="minus" onclick="minus()">Minus</button>
+                        <button id="plus-button" type="button" aria-label="plus" onclick="counter.plus()">Plus</button>
+                        <button id="minus-button" type="button" aria-label="minus"
+                            onclick="counter.minus()">Minus</button>
                         <button id="reset-button" type="button" aria-label="reset"
-                            onclick="resetCounterValue()">Reset</button>
+                            onclick="counter.resetCounterValue()">Reset</button>
                         <button id="generate-joke-button" type="button" aria-label="generate joke"
-                            onclick="generateJoke()">Random Joke</button>
+                            onclick="joke.generateJoke()">Random Joke</button>
                         <button id="switch-theme-button" type="button" aria-label="switch theme"
-                            onclick="switchTheme()"></button>
+                            onclick="theme.switchTheme()"></button>
                     </div>
                     <p id="counter-value">0</p>
                     <p id="joke"></p>
