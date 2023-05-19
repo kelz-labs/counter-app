@@ -11,7 +11,8 @@
             color: red;
         }
     </style>
-    <script defer src="web-components.js"></script>
+    <script defer src="webComponents.js"></script>
+    <script defer src="expandableList.js"></script>
 </head>
 
 <body>
@@ -19,6 +20,12 @@
     <todo-item checked="true">Todo 1 <span slot="description">Small Text</span></todo-item>
     <todo-item>Todo 2</todo-item>
     <todo-item>Todo 3</todo-item>
+    <todo-item>Todo 4</todo-item>
+
+    <ul is="expandable-list" data-expanded>
+        <li>First</li>
+        <li>Second</li>
+    </ul>
 </body>
 
 </html>

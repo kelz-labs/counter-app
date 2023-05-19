@@ -1,3 +1,5 @@
+// extending html element: 19.32
+
 const template = document.createElement("template");
 template.innerHTML = `
   <style>
@@ -31,6 +33,14 @@ class TodoItem extends HTMLElement {
     console.log(name, oldValue, newValue);
   }
 
+  connectedCallback() {
+    console.log("connected!");
+  }
+
+  disconnectedCallback() {
+    console.log("disconnected");
+  }
+
   updateChecked(value) {
     this.checkbox.checked = value !== null && value !== "false";
   }
@@ -39,9 +49,5 @@ class TodoItem extends HTMLElement {
 customElements.define("todo-item", TodoItem);
 
 const item = document.querySelector("todo-item");
-let checked = true;
 
-setInterval(() => {
-  checked = !checked;
-  item.setAttribute("checked", checked);
-}, 500);
+item.remove();
